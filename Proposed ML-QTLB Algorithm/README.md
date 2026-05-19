@@ -95,7 +95,8 @@ python pox.py log.level --DEBUG ML_QTLB_Proposed_Model \
 ---
 
 ## 📈 Results Summary
-Title:Performance Analysis for Load Balancing Algorithms using POX Controller in SDN
+Alrammahi, M.A.M. and W.S. Bhaya. Performance Analysis for Load Balancing Algorithms using POX Controller in SDN. in 2022 International Conference on Data Science and Intelligent Computing (ICDSIC). 2022. IEEE.
+
 ### vs Classical Algorithms [2022]
 
 | No. of Requests | RR | Random | WRR | LC | **ML-QTLB** |
@@ -106,7 +107,8 @@ Title:Performance Analysis for Load Balancing Algorithms using POX Controller in
 | 45,000 | 0.01745 | 0.01458 | 0.01454 | 0.01466 | **0.0123** |
 | **Improvement (%)** | **53.42** | **51.90** | **51.07** | **55.91** | — |
 
-Title:OPTIMIZING SERVER-SIDE DYNAMIC LOAD BALANCING IN SDN USING NOVEL ALGORITHMS BASED ON CPU, RAM, AND CONNECTION METRICS
+Alrammahi, M.A.M., OPTIMIZING SERVER-SIDE DYNAMIC LOAD BALANCING IN SDN USING NOVEL ALGORITHMS BASED ON CPU, RAM, AND CONNECTION METRICS. international journal of advanced research in computer science, 2026. 17(1): p. 21–27.
+DOI: http://dx.doi.org/10.26483/ijarcs.v17i1.7401 
 ### vs Server-Metric Algorithms [2026]
 
 | No. of Requests | LRAM | LCPU | LCPURAM | LC | LCLCPURAM | **ML-QTLB** |
