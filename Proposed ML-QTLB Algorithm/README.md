@@ -69,3 +69,87 @@ Traffic files transmitted: **1 MB, 10 MB, 25 MB, 50 MB, 75 MB**
 ---
 
 ## ⚙️ ML-QTLB Pipeline
+
+
+---
+
+## 🚀 How to Run
+
+### Requirements
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn joblib fcmeans
+```
+
+### Step 1: Train RF Classifier
+```bash
+python RF_Classifier_with_Validation.py
+```
+
+### Step 2: Run ML-QTLB on POX Controller
+```bash
+python pox.py log.level --DEBUG ML_QTLB_Proposed_Model \
+       --ip=10.0.0.1 \
+       --servers=10.0.0.2,10.0.0.3,10.0.0.4
+```
+
+---
+
+## 📈 Results Summary
+Title:Performance Analysis for Load Balancing Algorithms using POX Controller in SDN
+### vs Classical Algorithms [2022]
+
+| No. of Requests | RR | Random | WRR | LC | **ML-QTLB** |
+|----------------|-----|--------|-----|----|------------|
+| 300 | 0.01417 | 0.01372 | 0.01349 | 0.01497 | **0.0066** |
+| 3,000 | 0.01452 | 0.01457 | 0.01443 | 0.01463 | **0.0084** |
+| 15,000 | 0.01666 | 0.01473 | 0.01450 | 0.01485 | **0.0109** |
+| 45,000 | 0.01745 | 0.01458 | 0.01454 | 0.01466 | **0.0123** |
+| **Improvement (%)** | **53.42** | **51.90** | **51.07** | **55.91** | — |
+
+Title:OPTIMIZING SERVER-SIDE DYNAMIC LOAD BALANCING IN SDN USING NOVEL ALGORITHMS BASED ON CPU, RAM, AND CONNECTION METRICS
+### vs Server-Metric Algorithms [2026]
+
+| No. of Requests | LRAM | LCPU | LCPURAM | LC | LCLCPURAM | **ML-QTLB** |
+|----------------|------|------|---------|----|-----------|------------|
+| **Waiting Time (s)** | | | | | | |
+| 8,000 | 0.158 | 0.073 | 0.0738 | 0.0738 | 0.0741 | **0.00843** |
+| 40,000 | 0.160 | 0.0755 | 0.0747 | 0.0742 | 0.0726 | **0.01021** |
+| **Improvement (%)** | **94.66** | **88.45** | **88.58** | **88.58** | **88.62** | — |
+| **Service Time (s)** | | | | | | |
+| 8,000 | 0.020 | 0.0164 | 0.0079 | 0.0079 | 0.0084 | **0.00107** |
+| 40,000 | 0.021 | 0.0083 | 0.0085 | 0.0083 | 0.0085 | **0.00129** |
+| **Improvement (%)** | **94.65** | **93.48** | **86.46** | **86.46** | **87.26** | — |
+
+---
+
+## 🛠️ Experimental Environment
+
+| Parameter | Value |
+|-----------|-------|
+| Emulator | Mininet |
+| OS | Linux Ubuntu 20.04.4 LTS |
+| Controller | POX |
+| Switch | OVS (OpenFlow 1.0) |
+| Topology | Single Switch |
+| Clients | 3 — C1, C2, C3 |
+| Servers | 3 — S1, S2, S3 |
+| CPU | Intel Core i7-3625QM 2.2GHz |
+| RAM | 8 GB |
+| HDD | 512 GB SSD |
+
+---
+
+## 📖 Citation
+
+---
+
+## 📬 Contact
+
+**Maghrib Abidalreda Maky Alrammahi**
+University of Kufa — ITRDC, Najaf, Iraq
+📧 maghrib.alramahi@uokufa.edu.iq
+
+---
+
+## 📜 License
+MIT License
