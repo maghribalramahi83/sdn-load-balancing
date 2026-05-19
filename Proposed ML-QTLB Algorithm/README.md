@@ -65,6 +65,53 @@ Traffic files transmitted: **1 MB, 10 MB, 25 MB, 50 MB, 75 MB**
 |------|-------------|
 | `RF_Classifier_with_Validation.py` | **Random Forest Classifier (RFC)** training script with train/validation/test split (38%/38%/24%). Includes hyperparameter configuration (criterion=entropy, n_estimators=80, max_depth=4, min_samples_split=7, random_state=0), evaluation metrics (Accuracy=95.3%, Precision, Recall, F1-Score), confusion matrix plot, and overfitting/underfitting check |
 | `ML_QTLB_Proposed_Model.py` | **Full ML-QTLB implementation** running on the POX SDN controller. Integrates RF classifier for real-time traffic classification, M/M/1 Queueing Theory scheduler (λk, μk, ρk, Wk computation), aging-based starvation prevention (threshold T), and OpenFlow-based routing decisions via OVS switch |
+---
+
+## 📁 Traffic Generation Files
+
+Five dummy binary files were used to generate controlled
+SDN traffic flows in the Mininet emulation environment.
+Each file was transmitted between three client nodes
+(C1, C2, C3) and three server nodes (S1, S2, S3)
+via a Python script on Linux.
+
+| File | Size | Type | Purpose |
+|------|------|------|---------|
+| `file_1MB.bin`  | 1 MB  | Empty binary | Low traffic load |
+| `file_10MB.bin` | 10 MB | Empty binary | Light traffic load |
+| `file_25MB.bin` | 25 MB | Empty binary | Medium traffic load |
+| `file_50MB.bin` | 50 MB | Empty binary | Heavy traffic load |
+| `file_75MB.bin` | 75 MB | Empty binary | Maximum traffic load |
+
+> ⚠️ These files are not included in the repository
+> due to GitHub file size limitations (max 25 MB).
+> You can generate them locally using the script below.
+
+### Generate Traffic Files Locally
+
+```python
+import os
+
+# Generate dummy binary files for SDN traffic generation
+sizes =    # sizes in MB
+
+for s in sizes:
+    filename = f'file_{s}MB.bin'
+    with open(filename, 'wb') as f:
+        f.write(b'\0' * s * 1024 * 1024)
+    print(f"Created: {filename}  ({s} MB)")
+
+print("All traffic files generated successfully.")
+```
+
+These files were transmitted using the following command
+in the Mininet environment:
+
+```python
+# Send file from client to server
+import subprocess
+subprocess.run(['scp', 'file_1MB.bin',
+                'server@10.0.0.2:/tmp/'])
 
 ---
 
