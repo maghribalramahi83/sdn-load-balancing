@@ -6,7 +6,8 @@
 ## 📌 Overview
 
 This folder contains the complete implementation of the **ML-QTLB** model,
-including datasets, Python code, trained models, and result figures.
+including datasets, Python code, trained models, architectural diagrams,
+and result figures.
 
 **ML-QTLB** integrates:
 - Fuzzy C-Means (FCM) unsupervised clustering
@@ -18,16 +19,40 @@ including datasets, Python code, trained models, and result figures.
 
 ## 📂 Folder Contents
 
-### 🖼️ Images (6 Figures)
+### 🏗️ Architectural & Methodology Diagrams (3 Figures)
 
 | File | Description | DPI |
 |------|-------------|-----|
-| `Confusion_Matrix_RFC.png` | Confusion Matrix of Random Forest Classifier (RFC) showing classification results for Class 1 (Low-priority) and Class 2 (High-priority) traffic | 300 |
-| `Correlation_Matrix_13Features.png` | Correlation matrix heatmap for the dataset with 13 features, used to identify redundant features before feature selection | 300 |
-| `Generation_Requests.png` | Visualization of the traffic generation process showing the number and size of requests transmitted between clients and servers in the Mininet environment | — |
-| `ML_QTLB_Run_Proposed_Algorithm.png` | Screenshot or diagram of the proposed ML-QTLB algorithm running on the POX controller within the Mininet SDN testbed | — |
-| `Silhouette_Analysis_K10.png` | Silhouette score analysis for K = 2 to 10 clusters, confirming that the optimal number of clusters is K = 2 (score ≈ 0.53) | 300 |
-| `Wireshark_Capturing.png` | Screenshot of Wireshark capturing live traffic flows between clients (C1, C2, C3) and servers (S1, S2, S3) in the Mininet environment on Linux | — |
+| `Figure_1_Overall_Architecture.png` | **Overall Architecture of the Proposed ML-QTLB Framework** — high-level block diagram showing the integration of the ML pipeline (FCM + RF), the QT scheduler (M/M/1 + aging-based starvation prevention), and the POX SDN controller within the Mininet testbed | 300 |
+| `Figure_2_Network_Topology.png` | **Proposed Network Topology** — single-switch Mininet topology with three clients (C1, C2, C3), three servers (S1, S2, S3), one OVS switch (OpenFlow 1.0), and the POX controller | 300 |
+| `Figure_3_Stages_of_Proposed_Model.png` | **Stages of the Proposed Model** — flowchart of the five sequential stages: (1) Traffic Generation & Wireshark Capture, (2) Preprocessing (cleaning, feature selection 15→8, normalization), (3) FCM Clustering (K=2), (4) RF Classification, (5) QT Scheduling with Aging Threshold | 300 |
+
+---
+
+### 🖼️ Implementation & Analysis Figures (6 Figures)
+
+| File | Description | DPI |
+|------|-------------|-----|
+| `Figure_4_Wireshark_Capturing.png` | Screenshot of Wireshark capturing live traffic flows between clients (C1, C2, C3) and servers (S1, S2, S3) in the Mininet environment on Linux | — |
+| `Figure_5_Generation_Requests.png` | Visualization of the traffic generation process showing the number and size of requests transmitted between clients and servers in the Mininet environment | — |
+| `Figure_6_Correlation_Matrix_13Features.png` | Correlation matrix heatmap for the dataset with 13 features, used to identify redundant features before feature selection | 300 |
+| `Figure_7_Silhouette_Analysis_K10.png` | Silhouette score analysis for K = 2 to 10 clusters, confirming that the optimal number of clusters is K = 2 (score ≈ 0.53) | 300 |
+| `Figure_8_Confusion_Matrix_RFC.png` | Confusion Matrix of Random Forest Classifier (RFC) showing classification results for Class 1 (Low-priority) and Class 2 (High-priority) traffic | 300 |
+| `Figure_9_ML_QTLB_Run_Proposed_Algorithm.png` | Screenshot/diagram of the proposed ML-QTLB algorithm running on the POX controller within the Mininet SDN testbed | — |
+
+---
+
+### 📈 Results Figures (4 Performance Metric Plots)
+
+The following figures visualize ML-QTLB's performance against the
+baseline algorithms across the four evaluated performance metrics.
+
+| File | Description | DPI |
+|------|-------------|-----|
+| `Figure_10_Result_Average_Response_Time.png` | **Average Response Time (s)** — comparative chart of ML-QTLB vs. classical algorithms (RR, Random, WRR, LC) across four traffic load levels (300, 3,000, 15,000, 45,000 requests). ML-QTLB achieves up to **55.91% reduction** | 300 |
+| `Figure_11_Result_Degree_of_Load_Balancing.png` | **Degree of Load Balancing (%)** — comparative chart showing ML-QTLB vs. classical algorithms (RR, Random, WRR, LC) across the same four traffic loads. ML-QTLB achieves up to **56.38% improvement** | 300 |
+| `Figure_12_Result_Waiting_Time.png` | **Waiting Time (s)** — comparative chart of ML-QTLB vs. server-metric-based algorithms (LRAM, LCPU, LCPURAM, LC, LCLCPURAM) at 8,000 and 40,000 requests. ML-QTLB achieves up to **94.66% reduction** | 300 |
+| `Figure_13_Result_Service_Time.png` | **Service Time (s)** — comparative chart of ML-QTLB vs. server-metric-based algorithms (LRAM, LCPU, LCPURAM, LC, LCLCPURAM) at 8,000 and 40,000 requests. ML-QTLB achieves up to **94.65% reduction** | 300 |
 
 ---
 
@@ -65,6 +90,7 @@ Traffic files transmitted: **1 MB, 10 MB, 25 MB, 50 MB, 75 MB**
 |------|-------------|
 | `RF_Classifier_with_Validation.py` | **Random Forest Classifier (RFC)** training script with train/validation/test split (38%/38%/24%). Includes hyperparameter configuration (criterion=entropy, n_estimators=80, max_depth=4, min_samples_split=7, random_state=0), evaluation metrics (Accuracy=95.3%, Precision, Recall, F1-Score), confusion matrix plot, and overfitting/underfitting check |
 | `ML_QTLB_Proposed_Model.py` | **Full ML-QTLB implementation** running on the POX SDN controller. Integrates RF classifier for real-time traffic classification, M/M/1 Queueing Theory scheduler (λk, μk, ρk, Wk computation), aging-based starvation prevention (threshold T), and OpenFlow-based routing decisions via OVS switch |
+
 ---
 
 ## 📁 Traffic Generation Files
@@ -93,7 +119,7 @@ via a Python script on Linux.
 import os
 
 # Generate dummy binary files for SDN traffic generation
-sizes =    # sizes in MB
+sizes = [1, 10, 25, 50, 75]  # sizes in MB
 
 for s in sizes:
     filename = f'file_{s}MB.bin'
@@ -112,11 +138,20 @@ in the Mininet environment:
 import subprocess
 subprocess.run(['scp', 'file_1MB.bin',
                 'server@10.0.0.2:/tmp/'])
+```
 
 ---
 
 ## ⚙️ ML-QTLB Pipeline
 
+See `Figure_3_Stages_of_Proposed_Model.png` for the full pipeline flowchart.
+
+**Pipeline stages:**
+1. **Traffic Generation & Capture** — Mininet + Wireshark (15 raw features)
+2. **Preprocessing** — Cleaning → Feature Selection (15 → 8) → Min-Max Normalization
+3. **FCM Clustering** — Unsupervised labeling with K=2 (Silhouette-validated)
+4. **RF Classification** — Real-time classification (95.3% accuracy)
+5. **QT Scheduling** — M/M/1-based server selection with aging-based starvation prevention
 
 ---
 
@@ -142,9 +177,10 @@ python pox.py log.level --DEBUG ML_QTLB_Proposed_Model \
 ---
 
 ## 📈 Results Summary
-Alrammahi, M.A.M. and W.S. Bhaya. Performance Analysis for Load Balancing Algorithms using POX Controller in SDN. in 2022 International Conference on Data Science and Intelligent Computing (ICDSIC). 2022. IEEE.
 
 ### vs Classical Algorithms [2022]
+
+> Alrammahi, M.A.M. and W.S. Bhaya. *Performance Analysis for Load Balancing Algorithms using POX Controller in SDN.* In 2022 International Conference on Data Science and Intelligent Computing (ICDSIC). 2022. IEEE.
 
 | No. of Requests | RR | Random | WRR | LC | **ML-QTLB** |
 |----------------|-----|--------|-----|----|------------|
@@ -154,9 +190,12 @@ Alrammahi, M.A.M. and W.S. Bhaya. Performance Analysis for Load Balancing Algori
 | 45,000 | 0.01745 | 0.01458 | 0.01454 | 0.01466 | **0.0123** |
 | **Improvement (%)** | **53.42** | **51.90** | **51.07** | **55.91** | — |
 
-Alrammahi, M.A.M., OPTIMIZING SERVER-SIDE DYNAMIC LOAD BALANCING IN SDN USING NOVEL ALGORITHMS BASED ON CPU, RAM, AND CONNECTION METRICS. international journal of advanced research in computer science, 2026. 17(1): p. 21–27.
-DOI: http://dx.doi.org/10.26483/ijarcs.v17i1.7401 
+📊 See: `Figure_10_Result_Average_Response_Time.png` and `Figure_11_Result_Degree_of_Load_Balancing.png`
+
 ### vs Server-Metric Algorithms [2026]
+
+> Alrammahi, M.A.M. *Optimizing Server-Side Dynamic Load Balancing in SDN Using Novel Algorithms Based on CPU, RAM, and Connection Metrics.* International Journal of Advanced Research in Computer Science, 2026. 17(1): p. 21–27.
+> DOI: [http://dx.doi.org/10.26483/ijarcs.v17i1.7401](http://dx.doi.org/10.26483/ijarcs.v17i1.7401)
 
 | No. of Requests | LRAM | LCPU | LCPURAM | LC | LCLCPURAM | **ML-QTLB** |
 |----------------|------|------|---------|----|-----------|------------|
@@ -169,6 +208,8 @@ DOI: http://dx.doi.org/10.26483/ijarcs.v17i1.7401
 | 40,000 | 0.021 | 0.0083 | 0.0085 | 0.0083 | 0.0085 | **0.00129** |
 | **Improvement (%)** | **94.65** | **93.48** | **86.46** | **86.46** | **87.26** | — |
 
+📊 See: `Figure_12_Result_Waiting_Time.png` and `Figure_13_Result_Service_Time.png`
+
 ---
 
 ## 🛠️ Experimental Environment
@@ -179,7 +220,7 @@ DOI: http://dx.doi.org/10.26483/ijarcs.v17i1.7401
 | OS | Linux Ubuntu 20.04.4 LTS |
 | Controller | POX |
 | Switch | OVS (OpenFlow 1.0) |
-| Topology | Single Switch |
+| Topology | Single Switch (see `Figure_2_Network_Topology.png`) |
 | Clients | 3 — C1, C2, C3 |
 | Servers | 3 — S1, S2, S3 |
 | CPU | Intel Core i7-3625QM 2.2GHz |
@@ -190,13 +231,25 @@ DOI: http://dx.doi.org/10.26483/ijarcs.v17i1.7401
 
 ## 📖 Citation
 
+If you use this code or dataset in your research, please cite:
+
+```bibtex
+@article{alrammahi2026mlqtlb,
+  author  = {Alrammahi, Maghrib Abidalreda Maky},
+  title   = {ML-QTLB: Hybrid Machine Learning and Queueing-Theory 
+             Load Balancing Model for SDN},
+  journal = {International Journal of Intelligent Engineering and Systems},
+  year    = {2026}
+}
+```
+
 ---
 
 ## 📬 Contact
 
-**Maghrib Abidalreda Maky Alrammahi**
-University of Kufa — ITRDC, Najaf, Iraq
-📧 maghrib.alramahi@uokufa.edu.iq
+**Maghrib Abidalreda Maky Alrammahi**  
+University of Kufa — ITRDC, Najaf, Iraq  
+📧 [maghrib.alramahi@uokufa.edu.iq](mailto:maghrib.alramahi@uokufa.edu.iq)
 
 ---
 
