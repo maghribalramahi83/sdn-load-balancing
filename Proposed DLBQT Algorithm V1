@@ -1,0 +1,208 @@
+# DLBQT: Queueing-Theory-Based Dynamic Load Balancing Model for SDN
+
+---
+
+## 📌 Overview
+
+This folder contains the complete set of visual assets, key result tables, and Python implementation files for the **DLBQT** (Dynamic Load Balancing using Queueing Theory) model proposed for Software-Defined Networking (SDN).
+
+The DLBQT model integrates:
+- Centralized control via a POX SDN controller in a Mininet emulation environment.
+- Queueing-theory-based server selection using arrival rate, service rate, utilization factor, and server weight.
+- Dynamic load balancing across homogeneous and heterogeneous server environments.
+- Quantitative evaluation using waiting time, service time, and execution time with statistical effect-size analysis.
+
+This repository is designed to support **data availability**, **reproducibility**, and **transparent reporting** of the experimental results presented in the paper.
+
+---
+
+## 📂 Folder Contents
+
+### 🖼️ Figures (13 Manuscript Figures)
+
+All figures are exported at publication quality (recommended 300 DPI) and follow a consistent naming convention.
+
+| File | Description |
+|------|-------------|
+| `fig01_sdn_architecture.png` | **Figure 1. Architecture of SDN Layers** — conceptual illustration of the three-layer SDN architecture (application, control, data) used as background for the study |
+| `fig02_dlbqt_diagram.png` | **Figure 2. Diagram of the Proposed DLBQT Algorithm** — high-level block diagram showing the integration of the DLBQT mechanism within the SDN controller and its interaction with the data plane |
+| `fig03_dlbqt_flowchart.png` | **Figure 3. Flowchart of the Proposed DLBQT Model** — detailed algorithmic flowchart describing how arrival rate, service rate, utilization, and weight are computed and used for server selection |
+| `fig04_network_topology.png` | **Figure 4. Proposed SDN Network Topology** — Mininet topology with a single OpenFlow switch, multiple hosts generating traffic, and two backend servers controlled by POX |
+| `fig05_waiting_time_comparison.png` | **Figure 5. Average Waiting Time Comparison of DLBQT Across Network Environments** — comparative chart of LCPU, LRAM, LC, and DLBQT for homogeneous and heterogeneous scenarios |
+| `fig06_service_time_comparison.png` | **Figure 6. Average Service Time Comparison of DLBQT Across Network Environments** — plot showing mixed behavior of DLBQT versus baseline algorithms in service time |
+| `fig07_execution_time_comparison.png` | **Figure 7. Average Execution Time Comparison of DLBQT Across Network Environments** — chart illustrating the reduction in total execution time achieved by DLBQT |
+| `fig08_effect_size_waiting_time.png` | **Figure 8. Effect Size Analysis of Average Waiting Time** — Cohen's d values for DLBQT versus LCPU, LRAM, and LC in both environments |
+| `fig09_effect_size_service_time.png` | **Figure 9. Effect Size Analysis of Average Service Time** — Cohen's d values for service time comparisons across both environments |
+| `fig10_effect_size_execution_time.png` | **Figure 10. Effect Size Analysis of Execution Time** — Cohen's d values for execution time comparisons in homogeneous and heterogeneous environments |
+| `fig11_statistical_waiting_time.png` | **Figure 11. Statistical Analysis of DLBQT for Average Waiting Time** — plots summarizing mean, standard deviation, skewness, normality test, and confidence intervals |
+| `fig12_statistical_service_time.png` | **Figure 12. Statistical Analysis of DLBQT for Average Service Time** — statistical summary of service time improvements and degradations across environments |
+| `fig13_statistical_execution_time.png` | **Figure 13. Statistical Analysis of DLBQT for Average Execution Time** — statistical summary of execution time improvements across both environments |
+
+> 📎 Place all figure files in the `figures/` directory and ensure that the numbering matches the manuscript (Figures 1–13).
+
+---
+
+### 📊 Key Result Tables (10 CSV Files)
+
+The following CSV files contain the numerical results reported in Tables 1–10 of the manuscript.
+
+| File | Manuscript Table | Description |
+|------|------------------|-------------|
+| `table01_server_specifications.csv` | Table 1 | Comparative server specifications in homogeneous and heterogeneous scenarios |
+| `table02_waiting_time_homogeneous.csv` | Table 2 | Average waiting time comparison in homogeneous environment (LCPU, LRAM, LC, DLBQT) |
+| `table03_waiting_time_heterogeneous.csv` | Table 3 | Average waiting time comparison in heterogeneous environment |
+| `table04_service_time_homogeneous.csv` | Table 4 | Average service time comparison in homogeneous environment |
+| `table05_service_time_heterogeneous.csv` | Table 5 | Average service time comparison in heterogeneous environment |
+| `table06_execution_time_homogeneous.csv` | Table 6 | Average execution time comparison in homogeneous environment |
+| `table07_execution_time_heterogeneous.csv` | Table 7 | Average execution time comparison in heterogeneous environment |
+| `table08_effect_size_waiting_time.csv` | Table 8 | Effect size (Cohen's d) for average waiting time |
+| `table09_effect_size_service_time.csv` | Table 9 | Effect size (Cohen's d) for average service time |
+| `table10_effect_size_execution_time.csv` | Table 10 | Effect size (Cohen's d) for execution time |
+
+> 📎 Place all CSV files in the `tables/` directory. Each file should contain header rows and the exact values reported in the paper.
+
+---
+
+### 🐍 Python Code (Proposed Algorithm and Parameter Calculations)
+
+The repository may also include Python implementations related to the proposed DLBQT model and its queueing-theory calculations.
+
+| File | Description |
+|------|-------------|
+| `DLBQT_Proposed_Algorithm.py` | **Proposed DLBQT Python implementation** — Python code for the dynamic load balancing algorithm integrated with the SDN controller logic for request distribution and server selection |
+| `DLBQT_Parameter_Calculations.py` | **Queueing-parameter calculation code** — Python script for calculating the main DLBQT parameters, including arrival rate, service rate, utilization factor, server weight, and related decision values |
+| `DLBQT_Performance_Metrics.py` | **Performance metrics code** — Python code for calculating waiting time, service time, execution time, and percentage improvement |
+| `DLBQT_Statistical_Analysis.py` | **Statistical analysis code** — Python code used to compute effect size, mean, standard deviation, p-value, skewness, and confidence intervals for the reported results |
+
+> 📎 Place these files in a dedicated `code/` directory if you want the repository to include the implementation side in addition to figures and tables.
+
+---
+
+## 🧪 Experimental Environment
+
+The experiments corresponding to these figures, tables, and Python files were conducted in the following environment.
+
+| Parameter | Value |
+|----------|-------|
+| Emulator | Mininet |
+| SDN Controller | POX |
+| Switch | OpenFlow switch (single-switch topology) |
+| Hosts | Multiple hosts generating traffic toward two backend servers |
+| Environments | Homogeneous (2 identical servers) and heterogeneous (2 servers with different CPU/RAM) |
+| Metrics | Average waiting time, average service time, average execution time |
+| Statistical Tool | OriginPro 2026 (95% confidence interval, Cohen's d, normality tests) |
+
+---
+
+## 🔄 Workflow: How the Assets Relate to the Paper
+
+1. **Network and model description (Sections 1–4):**
+   - Figures 1–4 illustrate the SDN architecture, the proposed DLBQT model, the algorithmic flowchart, and the network topology.
+
+2. **Performance evaluation (Section 5):**
+   - Tables 2–7 and Figures 5–7 report the core performance metrics (waiting time, service time, execution time) for LCPU, LRAM, LC, and DLBQT in both homogeneous and heterogeneous environments.
+
+3. **Statistical analysis and discussion (Section 6):**
+   - Tables 8–10 and Figures 8–13 summarize the effect sizes, normality tests, and statistical behavior of DLBQT compared to baseline algorithms.
+
+4. **Implementation support:**
+   - The Python files in the `code/` folder document the proposed DLBQT algorithm, the parameter calculations, the metric calculations, and the statistical analysis process.
+
+This folder therefore contains the graphical, numerical, and implementation assets necessary to reproduce the main results reported in the manuscript.
+
+---
+
+## 🔗 Comparison Paper
+
+The main comparison in this work was conducted against the previously published study listed as reference **[20]** in the manuscript.
+
+**Reference [20]:**  
+Maghrib A. M. Alrammahi, *Optimizing Server-Side Dynamic Load Balancing in SDN Using Novel Algorithms Based on CPU, RAM, and Connection Metrics*, **International Journal of Advanced Research in Computer Science**, 2026, 17(1), pp. 21–27.
+
+**Paper link / DOI:**  
+[http://dx.doi.org/10.26483/ijarcs.v17i1.7401](http://dx.doi.org/10.26483/ijarcs.v17i1.7401)
+
+---
+
+## 📁 Example Repository Structure
+
+```text
+paper-assets/
+├── README.md
+├── figures/
+│   ├── fig01_sdn_architecture.png
+│   ├── fig02_dlbqt_diagram.png
+│   ├── fig03_dlbqt_flowchart.png
+│   ├── fig04_network_topology.png
+│   ├── fig05_waiting_time_comparison.png
+│   ├── fig06_service_time_comparison.png
+│   ├── fig07_execution_time_comparison.png
+│   ├── fig08_effect_size_waiting_time.png
+│   ├── fig09_effect_size_service_time.png
+│   ├── fig10_effect_size_execution_time.png
+│   ├── fig11_statistical_waiting_time.png
+│   ├── fig12_statistical_service_time.png
+│   └── fig13_statistical_execution_time.png
+├── tables/
+│   ├── table01_server_specifications.csv
+│   ├── table02_waiting_time_homogeneous.csv
+│   ├── table03_waiting_time_heterogeneous.csv
+│   ├── table04_service_time_homogeneous.csv
+│   ├── table05_service_time_heterogeneous.csv
+│   ├── table06_execution_time_homogeneous.csv
+│   ├── table07_execution_time_heterogeneous.csv
+│   ├── table08_effect_size_waiting_time.csv
+│   ├── table09_effect_size_service_time.csv
+│   └── table10_effect_size_execution_time.csv
+└── code/
+    ├── DLBQT_Proposed_Algorithm.py
+    ├── DLBQT_Parameter_Calculations.py
+    ├── DLBQT_Performance_Metrics.py
+    └── DLBQT_Statistical_Analysis.py
+```
+
+---
+
+## 📁 Example Figure Embedding (for GitHub Preview)
+
+```markdown
+## Figures
+
+### Figure 1. Architecture of SDN Layers
+
+
+### Figure 2. Diagram of the Proposed DLBQT Algorithm
+
+
+### Figure 3. Flowchart of the Proposed DLBQT Model
+
+```
+
+You can extend this block to include all figures up to Figure 13.
+
+---
+
+## 📜 Suggested Data Availability Statement (for the Manuscript)
+
+You may include the following text in the **DATA AVAILABILITY** section of the paper, updating the GitHub URL and repository name appropriately:
+
+> **Data Availability**  
+> The traffic dataset used in this study was derived from previously published data reported by Roy et al. [23]. The figures, key result tables, supplementary visual materials, and Python files associated with the DLBQT algorithm are openly available in the corresponding GitHub repository. The repository includes all manuscript figures (Figures 1–13), selected result tables (Tables 1–10), and Python code files for the proposed algorithm and parameter calculations in reusable formats to facilitate transparency and reproducibility. The assets can be accessed at: `https://github.com/<username>/<repository>` under the `figures/`, `tables/`, and `code/` directories.
+
+---
+
+## 🚀 How to Use This Folder
+
+1. Clone the repository or download the `paper-assets` folder.
+2. Use the CSV files in `tables/` to regenerate plots or perform additional analyses.
+3. Use the PNG figures in `figures/` for inclusion in slides, presentations, or derivative work.
+4. Use the Python files in `code/` to understand the proposed DLBQT logic, parameter calculations, and evaluation workflow.
+5. Reference the GitHub URL in future work that relies on these assets to ensure proper attribution.
+
+---
+
+## 📬 Contact
+
+**Maghrib A. M. Alrammahi**  
+Information Technology Research and Development Centre (ITRDC), University of Kufa, Najaf, Iraq  
+📧 maghrib.alramahi@uokufa.edu.iq
