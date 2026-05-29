@@ -206,7 +206,7 @@ print(df.shape)  # (4000, 8)
 If you use this work, please cite:
 
 > **[5] Baseline:**  
-> Maghrib A. M. Alrammahi, "Comparative Analysis of Random, Round Robin, Weighted Round Robin, and Least Connection Load Balancing Algorithms in SDN", IJACSA, 2022.
+> M. A. M. Alrammahi and W. S. Bhaya, "Performance Analysis for Load Balancing Algorithms using POX Controller in SDN," in 2022 International Conference on Data Science and Intelligent Computing (ICDSIC), 2022: IEEE, pp. 175–180.  DOI: 10.1109/ICDSIC56987.2022.10076081
 
 ---
 
