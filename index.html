@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABCO Advanced Biotech — Prices & Offers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#006f6a;--green-dark:#004d49;--green-mid:#00897b;--green-light:#e0f2f1;--green-pale:#f0faf9;
+  --red:#c0392b;--red-dark:#922b21;--red-light:#fdecea;--red-pale:#fff5f5;
+  --yellow:#d4a017;--yellow-dark:#a07810;--yellow-light:#fef9e7;--yellow-pale:#fffdf0;
+  --bg:#f4f6f8;--surface:#fff;--text:#1a1a2e;--muted:#667;
+  --shadow:0 4px 20px rgba(0,0,0,0.09);--radius:14px;
+  --font-en:'Inter',sans-serif;
+}
+body{font-family:var(--font-en);background:var(--bg);color:var(--text);min-height:100vh;}
+
+.top-header{background:linear-gradient(135deg,#0a0a1a 0%,#1a2a3a 60%,#0d1f2d 100%);color:#fff;padding:36px 24px 28px;text-align:center;}
+.company-name{font-size:32px;font-weight:800;letter-spacing:3px;color:#fff;text-transform:uppercase;}
+.page-title{display:inline-block;margin-top:18px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:8px 28px;border-radius:99px;font-size:17px;font-weight:600;letter-spacing:1.5px;color:#fff;}
+
+.page{max-width:1080px;margin:0 auto;padding:36px 20px 60px;}
+.section{margin-bottom:48px;}
+
+.sec-header{border-radius:var(--radius) var(--radius) 0 0;padding:20px 28px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;}
+.sec-header.green{background:linear-gradient(135deg,var(--green-dark),var(--green-mid));}
+.sec-header.red{background:linear-gradient(135deg,var(--red-dark),var(--red));}
+.sec-header.yellow{background:linear-gradient(135deg,var(--yellow-dark),var(--yellow));}
+.sec-title{font-size:22px;font-weight:800;color:#fff;letter-spacing:1px;}
+.sec-badge{background:rgba(255,255,255,0.18);color:#fff;font-size:12px;font-weight:600;letter-spacing:1px;padding:5px 14px;border-radius:99px;white-space:nowrap;}
+.sec-body{background:var(--surface);border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--shadow);padding:24px 28px 28px;border:1px solid rgba(0,0,0,0.06);border-top:none;}
+
+.kit-info{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;}
+.kit-tag{display:flex;align-items:center;gap:7px;background:var(--bg);border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;border:1px solid rgba(0,0,0,0.07);}
+.kit-tag .dot{width:9px;height:9px;border-radius:50%;}
+.green-dot{background:var(--green);}
+.red-dot{background:var(--red);}
+.yellow-dot{background:var(--yellow);}
+
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:24px;}
+.product-card{border-radius:10px;padding:14px 16px;border:1px solid;}
+.product-card.green{background:var(--green-pale);border-color:rgba(0,111,106,0.15);}
+.product-card.red{background:var(--red-pale);border-color:rgba(192,57,43,0.12);}
+.product-card.yellow{background:var(--yellow-pale);border-color:rgba(212,160,23,0.15);}
+.prod-name{font-size:12px;font-weight:700;letter-spacing:0.4px;margin-bottom:5px;line-height:1.3;}
+.prod-name.green{color:var(--green-dark);}
+.prod-name.red{color:var(--red-dark);}
+.prod-name.yellow{color:var(--yellow-dark);}
+.prod-sci{font-size:11px;color:var(--muted);margin-bottom:8px;font-style:italic;line-height:1.4;}
+.prod-price{font-size:15px;font-weight:800;}
+.prod-price.green{color:var(--green);}
+.prod-price.red{color:var(--red);}
+.prod-price.yellow{color:var(--yellow-dark);}
+.prod-unit{font-size:10px;color:var(--muted);font-weight:400;}
+
+.offers-title{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid;}
+.offers-title.green{color:var(--green);border-color:var(--green-light);}
+.offers-title.red{color:var(--red);border-color:#fad7d3;}
+.offers-title.yellow{color:var(--yellow-dark);border-color:#fde9b3;}
+
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.offer-card{border-radius:10px;padding:16px 18px;border:1px solid;}
+.offer-card.green{background:var(--green-pale);border-color:rgba(0,111,106,0.2);}
+.offer-card.red{background:var(--red-pale);border-color:rgba(192,57,43,0.15);}
+.offer-card.yellow{background:var(--yellow-pale);border-color:rgba(212,160,23,0.2);}
+.offer-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.offer-label.green{color:var(--green);}
+.offer-label.red{color:var(--red);}
+.offer-label.yellow{color:var(--yellow-dark);}
+.offer-deal{font-size:20px;font-weight:800;margin-bottom:8px;}
+.offer-deal.green{color:var(--green-dark);}
+.offer-deal.red{color:var(--red-dark);}
+.offer-deal.yellow{color:var(--yellow-dark);}
+.offer-rows{display:flex;flex-direction:column;gap:4px;}
+.offer-row{font-size:12px;display:flex;justify-content:space-between;gap:8px;}
+.offer-row .label{color:var(--muted);}
+.offer-row .val{font-weight:700;}
+.offer-row .val.green{color:var(--green);}
+.offer-row .val.red{color:var(--red);}
+.offer-row .val.yellow{color:var(--yellow-dark);}
+.offer-note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:4px;}
+
+.botox-table{width:100%;border-collapse:collapse;margin-bottom:16px;}
+.botox-table th{background:var(--yellow);color:#fff;padding:11px 16px;font-size:13px;font-weight:700;text-align:left;}
+.botox-table th:last-child{text-align:right;}
+.botox-table td{padding:11px 16px;font-size:13px;border-bottom:1px solid #f0e8cc;}
+.botox-table td:last-child{text-align:right;font-weight:700;color:var(--yellow-dark);}
+.botox-table tr:nth-child(even) td{background:#fefbf0;}
+.botox-table tr:last-child td{border-bottom:none;}
+
+.cash-banner{margin-top:40px;background:linear-gradient(135deg,#1a2a3a,#0d1f2d);border-radius:var(--radius);padding:22px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--shadow);}
+.cash-icon{font-size:36px;}
+.cash-text{flex:1;}
+.cash-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:4px;}
+.cash-desc{font-size:13px;color:rgba(255,255,255,0.65);}
+.cash-badge{background:linear-gradient(135deg,#f0c040,#d4a017);color:#1a1a00;font-size:22px;font-weight:900;padding:10px 24px;border-radius:10px;white-space:nowrap;letter-spacing:1px;}
+
+@media(max-width:600px){
+  .company-name{font-size:22px;}
+  .sec-body{padding:18px 16px 22px;}
+  .products-grid{grid-template-columns:1fr 1fr;}
+  .offers-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+  <div class="company-name">ABCO <span style="font-size:18px;font-weight:400;letter-spacing:2px;opacity:0.75;">Advanced Biotech</span></div>
+  <div class="page-title">PRICES &amp; OFFERS</div>
+</header>
+
+<main class="page">
+
+<!-- ══ SECTION 1: MESOAROMA ══ -->
+<section class="section">
+  <div class="sec-header green">
+    <div class="sec-title">MESOAROMA — Mesotherapy</div>
+    <div class="sec-badge">DermoAroma · Italy</div>
+  </div>
+  <div class="sec-body">
+    <div class="kit-info">
+      <div class="kit-tag"><span class="dot green-dot"></span>Kit = 10 Vials</div>
+      <div class="kit-tag"><span class="dot green-dot"></span>Each Vial = 5 cc</div>
+      <div class="kit-tag"><span class="dot green-dot"></span>Total = 50 cc / Kit</div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card green">
+        <div class="prod-name green">HYDROVITAMIN</div>
+        <div class="prod-sci">Acqua · Ascorbic Acid · Sodium Bicarbonate · EDTA Disodium</div>
+        <div class="prod-price green">199,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+      <div class="product-card green">
+        <div class="prod-name green">HA2 ESSENTIAL</div>
+        <div class="prod-sci">Aqua · Sodium Hyaluronate · Sodium Benzoate</div>
+        <div class="prod-price green">269,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+      <div class="product-card green">
+        <div class="prod-name green">GSH ESSENTIAL</div>
+        <div class="prod-sci">Aqua · Glutathione · Sodium Chloride</div>
+        <div class="prod-price green">199,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+      <div class="product-card green">
+        <div class="prod-name green">LIFT COCKTAIL</div>
+        <div class="prod-sci">Aqua · Sodium Mannuronate Methylsilanol · Caffeine · Sodium Hyaluronate · Sodium DNA</div>
+        <div class="prod-price green">199,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+      <div class="product-card green">
+        <div class="prod-name green">SC COCKTAIL</div>
+        <div class="prod-sci">Aqua · Sodium DNA · Ferulic Acid · Ubiquinone · Ceramide 3 · Squalane</div>
+        <div class="prod-price green">199,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+    </div>
+    <div class="offers-title green">OFFERS</div>
+    <div class="offers-grid">
+      <div class="offer-card green">
+        <div class="offer-label green">Offer 1</div>
+        <div class="offer-deal green">5 + 1 FREE</div>
+        <div class="offer-rows">
+          <div class="offer-row"><span class="label">Hydrovitamin / GSH / Lift / SC</span><span class="val green">165,833 IQD</span></div>
+          <div class="offer-row"><span class="label">HA2 Essential</span><span class="val green">224,167 IQD</span></div>
+          <div class="offer-row"><span class="label">Discount</span><span class="val green">≈ 16.7%</span></div>
+        </div>
+      </div>
+      <div class="offer-card green">
+        <div class="offer-label green">Offer 2</div>
+        <div class="offer-deal green">10 + 3 FREE</div>
+        <div class="offer-rows">
+          <div class="offer-row"><span class="label">Hydrovitamin / GSH / Lift / SC</span><span class="val green">153,077 IQD</span></div>
+          <div class="offer-row"><span class="label">HA2 Essential</span><span class="val green">206,923 IQD</span></div>
+          <div class="offer-row"><span class="label">Discount</span><span class="val green">≈ 23.1%</span></div>
+        </div>
+      </div>
+      <div class="offer-card green">
+        <div class="offer-label green">Offer 3</div>
+        <div class="offer-deal green">30 + 15 FREE</div>
+        <div class="offer-rows">
+          <div class="offer-row"><span class="label">Hydrovitamin / GSH / Lift / SC</span><span class="val green">132,667 IQD</span></div>
+          <div class="offer-row"><span class="label">HA2 Essential</span><span class="val green">179,333 IQD</span></div>
+          <div class="offer-row"><span class="label">Discount</span><span class="val green">≈ 33.3%</span></div>
+        </div>
+      </div>
+      <div class="offer-card green">
+        <div class="offer-label green">Special Offer</div>
+        <div class="offer-deal green">🤝 Agreement</div>
+        <div class="offer-rows">
+          <div class="offer-note">A customized agreement can be arranged between <strong style="color:var(--green-dark);">ABCO Advanced Biotech</strong> and the doctor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 2: PURASOMES ══ -->
+<section class="section">
+  <div class="sec-header red">
+    <div class="sec-title">PURASOMES — Exosomes</div>
+    <div class="sec-badge">DermoAroma · Italy</div>
+  </div>
+  <div class="sec-body">
+    <div class="kit-info">
+      <div class="kit-tag"><span class="dot red-dot"></span>Kit = 3 Vials</div>
+      <div class="kit-tag"><span class="dot red-dot"></span>Each Vial = 5 cc</div>
+      <div class="kit-tag"><span class="dot red-dot"></span>Total = 15 cc / Kit</div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card red">
+        <div class="prod-name red">HSC50+ — Hair &amp; Scalp</div>
+        <div class="prod-sci">20B Exosomes · 20 Growth Factors · HMW HA (1100–1400kDa) · LMW HA (80–100kDa) · 7 Peptides · 8 Vitamins</div>
+        <div class="prod-price red">749,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+      <div class="product-card red">
+        <div class="prod-name red">NC150+ — Nutri Complex</div>
+        <div class="prod-sci">20B Exosomes · 20 Growth Factors · PDRN · DMAE · Copper Gluconate · Glutathione · HMW &amp; LMW HA · 23 Amino Acids · 10 Vitamins · 6 Co-Enzymes</div>
+        <div class="prod-price red">749,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+      <div class="product-card red">
+        <div class="prod-name red">SGC100+ — Skin Glow</div>
+        <div class="prod-sci">20B Exosomes · 200mg Growth Factors · HMW HA · LMW HA · Plant Stem Cell · Niacinamide · Antioxidants · Peptides</div>
+        <div class="prod-price red">749,000 <span class="prod-unit">IQD / kit</span></div>
+      </div>
+    </div>
+    <div class="offers-title red">OFFERS</div>
+    <div class="offers-grid">
+      <div class="offer-card red">
+        <div class="offer-label red">Offer 1</div>
+        <div class="offer-deal red">5 + 1 FREE</div>
+        <div class="offer-rows">
+          <div class="offer-row"><span class="label">All types</span><span class="val red">624,167 IQD</span></div>
+          <div class="offer-row"><span class="label">Discount</span><span class="val red">≈ 16.7%</span></div>
+        </div>
+      </div>
+      <div class="offer-card red">
+        <div class="offer-label red">Offer 2</div>
+        <div class="offer-deal red">10 + 3 FREE</div>
+        <div class="offer-rows">
+          <div class="offer-row"><span class="label">All types</span><span class="val red">576,154 IQD</span></div>
+          <div class="offer-row"><span class="label">Discount</span><span class="val red">≈ 23.1%</span></div>
+        </div>
+      </div>
+      <div class="offer-card red">
+        <div class="offer-label red">Offer 3</div>
+        <div class="offer-deal red">30 + 15 FREE</div>
+        <div class="offer-rows">
+          <div class="offer-row"><span class="label">All types</span><span class="val red">499,333 IQD</span></div>
+          <div class="offer-row"><span class="label">Discount</span><span class="val red">≈ 33.3%</span></div>
+        </div>
+      </div>
+      <div class="offer-card red">
+        <div class="offer-label red">Special Offer</div>
+        <div class="offer-deal red">🤝 Agreement</div>
+        <div class="offer-rows">
+          <div class="offer-note">A customized agreement can be arranged between <strong style="color:var(--red-dark);">ABCO Advanced Biotech</strong> and the doctor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 3: BOTOX ══ -->
+<section class="section">
+  <div class="sec-header yellow">
+    <div class="sec-title">LANTOX — Botulinum Toxin Type A</div>
+    <div class="sec-badge">Spanish Origin · 100U / vial</div>
+  </div>
+  <div class="sec-body">
+    <div class="kit-info">
+      <div class="kit-tag"><span class="dot yellow-dot"></span>Botulinum Toxin Type A</div>
+      <div class="kit-tag"><span class="dot yellow-dot"></span>Each Vial = 100 Units</div>
+      <div class="kit-tag"><span class="dot yellow-dot"></span>Origin: Spain</div>
+    </div>
+    <table class="botox-table">
+      <thead>
+        <tr>
+          <th>Quantity (Vials)</th>
+          <th>Note</th>
+          <th>Price / Vial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1 – 9 vials</td><td>Standard price</td><td>70,000 IQD</td></tr>
+        <tr><td>10 – 19 vials</td><td>Volume discount</td><td>65,000 IQD</td></tr>
+        <tr><td>20 – 29 vials</td><td>Volume discount</td><td>60,000 IQD</td></tr>
+        <tr><td>30 – 49 vials</td><td>Volume discount</td><td>55,000 IQD</td></tr>
+        <tr><td>50+ vials</td><td>Best price</td><td>50,000 IQD</td></tr>
+      </tbody>
+    </table>
+    <div class="offers-title yellow" style="margin-top:22px;">SPECIAL</div>
+    <div class="offers-grid">
+      <div class="offer-card yellow">
+        <div class="offer-label yellow">Special Offer</div>
+        <div class="offer-deal yellow">🤝 Agreement</div>
+        <div class="offer-rows">
+          <div class="offer-note">A customized agreement can be arranged between <strong style="color:var(--yellow-dark);">ABCO Advanced Biotech</strong> and the doctor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASH BANNER -->
+<div class="cash-banner">
+  <div class="cash-icon">💵</div>
+  <div class="cash-text">
+    <div class="cash-title">Cash Payment Discount — Early Settlement</div>
+    <div class="cash-desc">An additional discount applies to all products when full payment is settled within <strong style="color:#f0c040;">7 days</strong> from the invoice date.</div>
+  </div>
+  <div class="cash-badge">7% OFF</div>
+</div>
+
+</main>
+</body>
+</html>
