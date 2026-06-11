@@ -196,11 +196,6 @@ This paper is the direct baseline for DLBQT — the same Mininet/POX simulation 
 
 If you use the DLBQT algorithm, code, or results in your research, please cite:
 
-> Maghrib A. M. Alrammahi, Mohanad Y. Al-hamami, Ali M. Taher,  
-> *"A Queueing Theory-Based Dynamic Load Balancing Algorithm for Optimizing Software-Defined Networking Performance in Homogeneous and Heterogeneous Environments"*,  
-> **Journal Européen des Systèmes Automatisés (JESA)**, Vol. 59, No. 5, 2026.  
-> DOI: [https://doi.org/10.18280/jesa.5905xx](https://doi.org/10.18280/jesa.5905xx)
-
 And the baseline algorithms paper:
 
 > Maghrib A. M. Alrammahi, Mohanad Y. Al-hamami, Ali M. Taher,  
