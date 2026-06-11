@@ -1,4 +1,4 @@
-# DLBQT: A Queueing Theory-Based Dynamic Load Balancing Algorithm for Optimizing Software-Defined Networking Performance in Homogeneous and Heterogeneous Environments
+#  A Queueing Theory-Based Dynamic Load Balancing Algorithm for Optimizing Software-Defined Networking Performance in Homogeneous and Heterogeneous Environments
 
 ***
 
