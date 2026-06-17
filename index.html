@@ -105,6 +105,21 @@ body{font-family:var(--font-en);background:var(--bg);color:var(--text);min-heigh
   .products-grid{grid-template-columns:1fr 1fr;}
   .offers-grid{grid-template-columns:1fr;}
 }
+
+.offer-card.cash{background:#fffbe6;border-color:rgba(212,160,23,0.35);}
+.offer-label.cash{color:#a07810;}
+.offer-deal.cash{color:#7a5500;font-size:17px;}
+.offer-row .val.cash{color:#a07810;}
+.offer-card.cash-botox{background:#fff8e1;border-color:rgba(212,160,23,0.4);}
+.offer-label.cash-botox{color:#a07810;}
+.cash-note-title{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:22px 0 12px;padding-bottom:6px;border-bottom:2px solid;}
+.cash-note-title.green{color:var(--green);border-color:var(--green-light);}
+.cash-note-title.red{color:var(--red);border-color:#fad7d3;}
+.cash-note-title.yellow{color:var(--yellow-dark);border-color:#fde9b3;}
+.cash-row-wrap{background:#fffbe6;border:1px solid rgba(212,160,23,0.3);border-radius:10px;padding:14px 18px;margin-top:4px;}
+.cash-row-wrap p{font-size:12.5px;line-height:1.7;color:#5a4000;}
+.cash-row-wrap strong{color:#7a5500;}
+
 </style>
 </head>
 <body>
@@ -175,13 +190,15 @@ body{font-family:var(--font-en);background:var(--bg);color:var(--text);min-heigh
           <div class="offer-row"><span class="label">Discount</span><span class="val green">≈ 23.1%</span></div>
         </div>
       </div>
-      <div class="offer-card green">
-        <div class="offer-label green">Offer 3</div>
-        <div class="offer-deal green">30 + 15 FREE</div>
-        <div class="offer-rows">
-          <div class="offer-row"><span class="label">Hydrovitamin / GSH / Lift / SC</span><span class="val green">132,667 IQD</span></div>
-          <div class="offer-row"><span class="label">HA2 Essential</span><span class="val green">179,333 IQD</span></div>
-          <div class="offer-row"><span class="label">Discount</span><span class="val green">≈ 33.3%</span></div>
+      </div>
+
+      <!-- Cash within 7 days — MESOAROMA -->
+      <div class="offer-card cash" style="border-color:rgba(212,160,23,0.35);">
+        <div class="offer-label cash">💵 Cash — within 7 days</div>
+        <div class="offer-rows" style="gap:6px;margin-top:6px;">
+          <div class="offer-row"><span class="label" style="font-weight:600;">Offer 1 (Cash)</span><span class="val cash">5 + 2 FREE</span></div>
+          <div class="offer-row"><span class="label" style="font-weight:600;">Offer 2 (Cash)</span><span class="val cash">10 + 5 FREE</span></div>
+          <div class="offer-row" style="margin-top:4px;"><span class="label">Extra Discount</span><span class="val cash">20% OFF</span></div>
         </div>
       </div>
       <div class="offer-card green">
@@ -242,12 +259,15 @@ body{font-family:var(--font-en);background:var(--bg);color:var(--text);min-heigh
           <div class="offer-row"><span class="label">Discount</span><span class="val red">≈ 23.1%</span></div>
         </div>
       </div>
-      <div class="offer-card red">
-        <div class="offer-label red">Offer 3</div>
-        <div class="offer-deal red">30 + 15 FREE</div>
-        <div class="offer-rows">
-          <div class="offer-row"><span class="label">All types</span><span class="val red">499,333 IQD</span></div>
-          <div class="offer-row"><span class="label">Discount</span><span class="val red">≈ 33.3%</span></div>
+      </div>
+
+      <!-- Cash within 7 days — PURASOMES -->
+      <div class="offer-card cash" style="border-color:rgba(212,160,23,0.35);">
+        <div class="offer-label cash">💵 Cash — within 7 days</div>
+        <div class="offer-rows" style="gap:6px;margin-top:6px;">
+          <div class="offer-row"><span class="label" style="font-weight:600;">Offer 1 (Cash)</span><span class="val cash">5 + 2 FREE</span></div>
+          <div class="offer-row"><span class="label" style="font-weight:600;">Offer 2 (Cash)</span><span class="val cash">10 + 5 FREE</span></div>
+          <div class="offer-row" style="margin-top:4px;"><span class="label">Extra Discount</span><span class="val cash">20% OFF</span></div>
         </div>
       </div>
       <div class="offer-card red">
@@ -264,7 +284,7 @@ body{font-family:var(--font-en);background:var(--bg);color:var(--text);min-heigh
 <!-- ══ SECTION 3: BOTOX ══ -->
 <section class="section">
   <div class="sec-header yellow">
-    <div class="sec-title">LANTOX — Botulinum Toxin Type A</div>
+    <div class="sec-title">Botox LANTOX — Botulinum Toxin Type A</div>
     <div class="sec-badge">Spanish Origin · 100U / vial</div>
   </div>
   <div class="sec-body">
@@ -289,6 +309,13 @@ body{font-family:var(--font-en);background:var(--bg);color:var(--text);min-heigh
         <tr><td>50+ vials</td><td>Best price</td><td>50,000 IQD</td></tr>
       </tbody>
     </table>
+
+    <!-- Cash within 7 days — BOTOX -->
+    <div class="cash-row-wrap" style="margin-bottom:18px;">
+      <p>💵 <strong>Cash Payment — within 7 days:</strong><br>
+      • <strong>1–9 vials</strong> &amp; <strong>50+ vials</strong>: additional <strong>5% OFF</strong> the listed price<br>
+      • <strong>10–19 vials</strong>, <strong>20–29 vials</strong> &amp; <strong>30–49 vials</strong>: additional <strong>10% OFF</strong> the listed price</p>
+    </div>
     <div class="offers-title yellow" style="margin-top:22px;">SPECIAL</div>
     <div class="offers-grid">
       <div class="offer-card yellow">
@@ -301,17 +328,6 @@ body{font-family:var(--font-en);background:var(--bg);color:var(--text);min-heigh
     </div>
   </div>
 </section>
-
-<!-- CASH BANNER -->
-<div class="cash-banner">
-  <div class="cash-icon">💵</div>
-  <div class="cash-text">
-    <div class="cash-title">Cash Payment Discount — Early Settlement</div>
-    <div class="cash-desc">An additional discount applies to all products when full payment is settled within <strong style="color:#f0c040;">7 days</strong> from the invoice date.</div>
-  </div>
-  <div class="cash-badge">7% OFF</div>
-</div>
-
 </main>
 </body>
 </html>
