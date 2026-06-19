@@ -1,0 +1,142 @@
+# Hyperparameters and Random Seeds
+## ML-QTLB Research Project
+**Author:** Maghrib Abidalreda Maky Alrammahi  
+**Email:** maghrib.alramahi@uokufa.edu.iq  
+**Repository:** https://github.com/maghribalramahi83/sdn-load-balancing
+
+---
+
+## 1. Dataset Construction
+
+| Parameter | Value |
+|---|---|
+| Total records | 25,000 |
+| Original features | 15 |
+| Selected features | 8 |
+| Normalization | Min-Max [0, 1] |
+| File sizes used | 1 MB, 10 MB, 25 MB, 50 MB, 75 MB |
+| Clients | 3 (10.0.0.4, 10.0.0.5, 10.0.0.6) |
+| Servers | 3 (10.0.0.1, 10.0.0.2, 10.0.0.3) |
+| SDN Controller IP | 10.0.1.1 |
+| OpenFlow version | 1.0 |
+
+---
+
+## 2. Silhouette Analysis
+
+| Parameter | Value |
+|---|---|
+| K range tested | 2 to 10 |
+| Best K selected | 2 |
+| Best Silhouette Score | 0.53 |
+
+---
+
+## 3. Fuzzy C-Means (FCM) Clustering
+
+| Parameter | Value |
+|---|---|
+| Number of clusters (c) | 2 |
+| Fuzziness coefficient (m) | 2 |
+| Error tolerance | 0.005 |
+| Maximum iterations | 1000 |
+| Initialization | None (random) |
+| random_state / seed | Not fixed (deterministic via error tolerance) |
+| Cluster 1 | Light traffic (low Bytes, low Bits/s, few Packets) |
+| Cluster 2 | Heavy traffic (high Bytes, high Bits/s, many Packets) |
+
+---
+
+## 4. Random Forest (RF) Classifier
+
+| Parameter | Value |
+|---|---|
+| criterion | entropy |
+| n_estimators | 80 |
+| max_depth | 4 |
+| min_samples_split | 7 |
+| random_state | 0 |
+| Dataset split — Test set | 24% (test_size=0.24, random_state=42) |
+| Dataset split — Train/Validation | 50/50 of remaining 76% (val_size=0.50, random_state=42) |
+| RF Accuracy | 95.3% |
+| SVM Accuracy (baseline) | 79.4% |
+
+---
+
+## 5. QT-Based Scheduler (M/M/1)
+
+| Parameter | Value |
+|---|---|
+| Number of servers | 3 |
+| Scheduling criterion | Minimum W_k = ρ_k / (μ_k × (1 − ρ_k)) |
+| ρ_k cap (stability) | 0.99 |
+| μ_k — Light traffic (Class 0) | 130.0 requests/sec |
+| μ_k — Heavy traffic (Class 1) | 70.0 requests/sec |
+| λ_k smoothing factor | 0.7 (old) + 0.3 (instant) |
+
+---
+
+## 6. Starvation Prevention Mechanism
+
+| Parameter | Value |
+|---|---|
+| Starvation threshold (T) | 3.0 seconds |
+| Priority queue levels | 2 (0 = light, 1 = heavy) |
+| Light-first counter threshold | 3 packets before serving 1 heavy |
+
+---
+
+## 7. Traffic Load Levels Evaluated
+
+### Classical Baselines (Tables 7–8):
+| Load Level | No. of Requests |
+|---|---|
+| Load 1 | 300 |
+| Load 2 | 3,000 |
+| Load 3 | 15,000 |
+| Load 4 | 45,000 |
+
+### Server-Metric Baselines (Tables 9–10):
+| Load Level | No. of Requests |
+|---|---|
+| Load 1 | 8,000 |
+| Load 2 | 40,000 |
+
+---
+
+## 8. POX Controller Settings
+
+| Parameter | Value |
+|---|---|
+| FLOW_IDLE_TIMEOUT | 10 seconds |
+| FLOW_MEMORY_TIMEOUT | 60 seconds |
+| ARP probe cycle time | 5 seconds |
+| ARP timeout | 3 seconds |
+| OpenFlow version | 1.0 |
+
+---
+
+## 9. Summary of All Random Seeds
+
+| Component | Seed / random_state |
+|---|---|
+| RF Classifier training | random_state = 0 |
+| Train/Test split | random_state = 42 |
+| Train/Validation split | random_state = 42 |
+| FCM Clustering | No fixed seed (convergence-based) |
+| Traffic file selection (client) | random.choice() — no fixed seed |
+
+---
+
+## 10. Software Environment
+
+| Tool / Library | Version used |
+|---|---|
+| Python | 3.x |
+| scikit-learn | Latest stable |
+| scikit-fuzzy | Latest stable |
+| joblib | Latest stable |
+| POX Controller | dart branch |
+| Mininet | 2.x |
+| Wireshark | Latest stable |
+| OS | Linux (Ubuntu) |
