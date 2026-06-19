@@ -29,7 +29,7 @@ and **3 servers** using files ranging from **1 MB to 75 MB**.
 - Real traffic dataset captured from a Mininet SDN environment
 - Five-stage processing pipeline from traffic generation to routing decision
 - FCM clustering with **K = 2** validated using silhouette analysis
-- RF traffic classifier with **95.3% accuracy**
+- RF traffic classifier with **99.88% accuracy**
 - M/M/1-based server selection using \( \lambda_k \), \( \mu_k \), \( \rho_k \), and \( W_k \)
 - Aging-based anti-starvation mechanism for low-priority flows
 - Comparative evaluation against:
