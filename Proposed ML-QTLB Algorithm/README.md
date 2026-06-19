@@ -107,6 +107,29 @@ Traffic files used for generation:
 | `RF_Classifier_with_Validation.py` | Random Forest training and validation script with train/validation/test split, metrics, and confusion matrix |
 | `ML_QTLB_Proposed_Model.py` | Full ML-QTLB implementation for the POX controller including RF classification, QT scheduling, and starvation prevention |
 
+| File | Description |
+|------|-------------|
+| `RF_Classifier_with_Validation.py` | Random Forest training and validation script |
+| `ML_QTLB_RF_QT_Controller.py` | Full ML-QTLB POX controller (RF + QT + Starvation) |
+| `ML_QTLB_Client_Metrics.py` | Client script computing RT, WT, ST, LB |
+| `Mininet Topology.py` | Exact Mininet topology (3 clients, 3 servers, 1 OVS) |
+| `Cleaning Data.py` | Data cleaning script |
+| `Calculate of Data Scaling.py` | Min-Max normalization script |
+| `Calculate of FCM_Silhouette.py` | FCM clustering + Silhouette score |
+| `Calculate of Silhouette analysis.py` | Silhouette analysis (K=2 to 10) |
+| `Generate Traffic Files Locally.py` | Traffic file generation script |
+
+## ⚖️ Baseline Algorithm Implementations
+
+| File | Algorithm | Type |
+|------|-----------|------|
+| `RR Algorithm.py` | Round Robin | Classical |
+| `Random Algorithm.py` | Random | Classical |
+| `WRR Algorithm.py` | Weighted Round Robin | Classical |
+| `LC Algorithm.py` | Least Connection | Classical |
+| `LCPU Algorithm.py` | Least CPU | Server-Metric |
+| `LCPURAM Algorithm.py` | Least CPU + RAM | Server-Metric |
+| `LCCPURAM Algorithm.py` | LC + CPU + RAM | Server-Metric |
 ---
 
 ## 📁 Traffic Generation Files
@@ -185,30 +208,66 @@ The ML-QTLB framework operates in five sequential stages:
 | Storage | 512 GB SSD |
 
 ---
+## 🤖 Pre-trained Model & Documentation
+
+| File | Description |
+|------|-------------|
+| `rf_model.pkl` | Pre-trained RF model — load directly without retraining |
+| `hyperparameters_and_seeds.md` | All hyperparameters, random seeds, and software environment |
+
+### Load Pre-trained Model
+```python
+import joblib
+model = joblib.load('rf_model.pkl')
+prediction = model.predict([features])
+```
+
 
 ## 🚀 How to Run
 
 ### Requirements
-
 ```bash
-pip install pandas numpy scikit-learn matplotlib seaborn joblib fcmeans
+pip install pandas numpy scikit-learn matplotlib seaborn joblib scikit-fuzzy
 ```
 
-### Step 1: Train the RF Classifier
-
+### Step 1: Preprocess Data
 ```bash
-python RF_Classifier_with_Validation.py
+python "Cleaning Data.py"
+python "Calculate of Data Scaling.py"
+python "Calculate of FCM_Silhouette.py"
 ```
 
-### Step 2: Run ML-QTLB on the POX Controller
-
+### Step 2: Train RF Classifier (or use pre-trained model)
 ```bash
-python pox.py log.level --DEBUG ML_QTLB_Proposed_Model \
-       --ip=10.0.0.1 \
-       --servers=10.0.0.2,10.0.0.3,10.0.0.4
+python "Random Forest Classifier (RFC) - with validation set.py"
+# Output: rf_model.pkl
 ```
 
----
+### Step 3: Start Mininet Topology
+```bash
+sudo python "Mininet Topology.py"
+```
+
+### Step 4: Run POX Controller (ML-QTLB)
+```bash
+cd ~/pox
+./pox.py log.level --DEBUG ext.ML_QTLB_RF_QT_Controller
+```
+
+### Step 5: Run Client Metrics Script
+```bash
+python "ML_QTLB_Client_Metrics.py"
+# Outputs: Average RT, WT, ST, Degree of LB
+```
+
+### Step 6: Run Baseline Algorithms (for comparison)
+```bash
+# Example: Round Robin
+./pox.py log.level --DEBUG ext.RR_Algorithm
+
+# Example: LC
+./pox.py log.level --DEBUG ext.LC_Algorithm
+```
 
 ## 📈 Results Summary
 
