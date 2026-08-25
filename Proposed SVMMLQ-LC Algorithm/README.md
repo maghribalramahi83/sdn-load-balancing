@@ -1,222 +1,337 @@
-# SVMMLQ-LC: SVM-Based Multi-Level Queue with Least-Connection Load Balancing for SDN
+# SVMMLQ-LC: Intelligent SDN Load Balancing with SVM, Multi-Level Queue Scheduling, and Least-Connection Selection
 
-> **Repository:** `Proposed-SVMMLQ-LC-Algorithm`  
+> **Repository:** `sdn-load-balancing`  
+> **Project Folder:** `Proposed SVMMLQ-LC Algorithm`  
 > **Author:** Maghrib Abidalreda Maky Alrammahi  
 > **Institution:** University of Kufa — ITRDC, Najaf, Iraq  
-> **Status:** Under Review (2026)
+> **Status:** Revised manuscript under review (2026)
 
 ---
 
-## 📌 Overview
+## Overview
 
-This repository contains the **complete asset package** for the proposed **SVMMLQ‑LC** hybrid SDN load-balancing model, including all manuscript figures, preprocessed datasets, and Python source code used in the experimental evaluation.
+This repository provides the reproducibility materials for the revised manuscript:
 
-**SVMMLQ‑LC** is a six-stage hybrid model that integrates:
+> **SVMMLQ-LC: An Intelligent Machine Learning-Based Load-Balancing Framework with Multi-Level Queue Scheduling and Least-Connection Selection for Software-Defined Networking**
 
-- 🖧 Centralized SDN control using the **POX controller** in a **Mininet** emulation environment.
-- 🔬 **K‑Means clustering** (k = 2, Elbow Method) for unsupervised traffic grouping into two priority classes.
-- 🤖 **SVM-based online classification** (RBF kernel) achieving **98.75% test accuracy**.
-- 📋 **Two-level Multi-Level Queue (MLQ)** scheduler with a **threshold-based starvation prevention** rule (T = 3).
-- ⚖️ **Least-Connection (LC)** dynamic server selection to minimize active-connection imbalance across the server pool.
-- 📊 Statistical validation using **two-way ANOVA**, **eta-squared effect size (η²)**, and **95% confidence intervals** via **OriginPro 2026**.
+The repository includes the four experimental datasets, six Python scripts for the proposed model, four baseline load-balancing implementations, thirteen manuscript figures, and supporting materials associated with the revised study.
 
----
+The proposed **SVMMLQ-LC** framework integrates:
 
-## 📂 Repository Contents (All Files in One Folder)
-
-All files are placed directly inside the `Proposed-SVMMLQ-LC-Algorithm/` folder:
-
+- Software-Defined Networking (SDN) control using a POX controller in a Mininet emulation environment.
+- K-Means clustering for data-driven traffic grouping.
+- Support Vector Machine (SVM) classification with an RBF kernel.
+- A two-level Multi-Level Queue (MLQ) mechanism for priority-aware packet scheduling.
+- A threshold-based scheduling rule with \(T = 3\) to reduce lower-priority queue starvation.
+- Least-Connection (LC) server selection for dynamic server assignment.
+- Comparative evaluation against Random, Round Robin, Weighted Round Robin, and Least-Connection baseline algorithms.
 
 ---
 
-## 🖼️ Figures — Detailed Description (10 Files)
+## Repository Structure
 
-### Architectural & Methodology Figures
-
-| # | Filename | Paper Figure | Description |
-|---|----------|--------------|-------------|
-| 1 | `fig01_SDN-Topology.jpg` | Figure 1 | **SDN Topology and Deployment of the SVMMLQ‑LC Controller** — Three-plane SDN architecture (Application Plane: HTTP files; Control Plane: SDN Controller with proposed SVMMLQ‑LC model; Data Plane: Data Center with OpenFlow Switch and Web Server Pool). |
-| 2 | `fig02_Proposed-of-Network-Topology.jpg` | Figure 3 | **Proposed Mininet Single‑Switch Network Topology** — Three client hosts (10.0.0.4–6) connected to Open Virtual Switch (OVS1), forwarding to three HTTP servers (10.0.0.1–3). SDN Controller at 10.0.1.1 manages flows via OpenFlow v1.0. |
-| 3 | `fig03_Proposed-SVMMLQ-LC-Stages.jpg` | Figure 2 | **Proposed SVMMLQ‑LC Workflow — Six Stages** — (1) Traffic generation in Mininet + Wireshark, (2) Preprocessing (Median Cleaning, Feature Selection, MinMax Normalization), (3) K‑Means clustering, (4) SVM training and online classification, (5) MLQ scheduling with starvation control, (6) Least-Connection server selection. |
-| 4 | `fig04_Data-points-before-clustering-in-K-means.jpg` | Figure 5a | **Data Points Before K‑Means Clustering** — Scatter plot of 4,000 normalized flow records (Feature 1 vs. Feature 2) before cluster assignment, all in single color (blue). |
-| 5 | `fig05_Data-points-after-clustering-in-K-means.jpg` | Figure 5b | **Data Points After K‑Means Clustering (k=2)** — Class 0 (high priority, purple) and Class 1 (low priority, yellow) with two red centroids. |
-| 6 | `fig06_proposed-Flowchart.jpg` | Figure 6 | **Flowchart of Two‑Level MLQ Scheduler (T=3)** — Initialize & Push → Pop & Decision (Counter ≥ 3 AND Queue[1] not empty?) → Process & Control (serve Class 1 and reset, or serve Class 0). |
-| 7 | `fig07_Confusion-Matrix-SVM.jpg` | — | **Confusion Matrix of SVM** — [[664, 13], [0, 369]]. Precision: 96.59%, Recall: 100%, F1: 98.26%, Accuracy: 98.75%. |
-| 8 | `fig08_Result-of-Mean-Average-Time-s.jpg` | Figure 7 | **Mean / Average Time (s)** — SVMMLQ‑LC vs. Random, RR, WRR, LC across 300–45k requests. Best: 0.00751 s at 300 requests. |
-| 9 | `fig09_Result-of-STD-Average-Response-Time-s.jpg` | Figure 8 | **STD / Average Response Time (s)** — SVMMLQ‑LC: 0.00147–0.008 s vs. baselines: 0.012–0.017 s. |
-| 10 | `fig10_Result-of-CV-Degree-of-Load-Balancing.jpg` | Figure 9 | **CV / Degree of Load Balancing (%)** — SVMMLQ‑LC: 19.60–35.9% vs. baselines: 52–67%. |
-
----
-
-## 📊 Datasets — Detailed Description (4 CSV Files)
-
-| # | Filename | Stage | Records | Features | Description |
-|---|----------|-------|---------|----------|-------------|
-| 1 | `My-Dataset-Cleaning-Data.csv` | Stage 2.1 | 4,000 | 15 | Raw dataset after **median-based imputation**. Missing/noisy values replaced with median. Original 15 features: Packets, Bytes, Packets A→B, Bytes A→B, Packets B→A, Bytes B→A, Bits/s A→B, Bits/s B→A, Duration, Max/Min/Mean Packet Size, Inter-Arrival Time, Flow Start/End Time. |
-| 2 | `My-Dataset-Feature-Selection.csv` | Stage 2.2 | 4,000 | 8 | After **correlation-matrix feature selection**. 8 features retained: Packets, Bytes, Packets A→B, Bytes A→B, Packets B→A, Bytes B→A, Bits/s A→B, Bits/s B→A. |
-| 3 | `My-Dataset-MinMaxScaler.csv` | Stage 2.3 | 4,000 | 8 | After **MinMax normalization [0,1]**. All 8 features scaled: x_norm = (x − x_min)/(x_max − x_min). Input for K‑Means and SVM. |
-| 4 | `My-Dataset-K-Means.csv` | Stage 3 | 4,000 | 9 | With **K‑Means labels (k=2)**. Class 0 = high priority (low volume), Class 1 = low priority (high volume). Used as ground truth for SVM training. |
-
----
-
-## 🐍 Python Code — Detailed Description (5 Scripts)
-
-| # | Filename | Stage | Input | Output | Description |
-|---|----------|-------|-------|--------|-------------|
-| 1 | `Elbow-method-for-calculate-K-means-and-with-n-clusters-12-Loop.py` | 3.1 | `My-Dataset-MinMaxScaler.csv` | Elbow plot | Runs K‑Means for k=2 to 12. Plots inertia vs. k. Elbow at k=2 confirms two-cluster structure. |
-| 2 | `Calculate-of-K-means-with-2-cluster.py` | 3.2 | `My-Dataset-MinMaxScaler.csv` | `My-Dataset-K-Means.csv` + plots | Applies K‑Means (k=2). Assigns Class 0/1 labels. Generates before/after scatter plots. |
-| 3 | `SVM-with-validation-set-manually.py` | 4 | `My-Dataset-K-Means.csv` | Trained SVM + metrics | Trains SVM (RBF, C=1, gamma='auto'). 3-way split: train/val/test. Reports: Train 98.66%, Val 98.74%, Test 98.75%. Confusion matrix + Precision/Recall/F1. |
-| 4 | `Multi-Level-Queue-scheduling-code.py` | 5 | Classified flows | Queue log | Implements MLQ (Queue[0]=Class 0, Queue[1]=Class 1, T=3). Logic: Pop from Q0, increment counter; if Counter≥3 AND Q1 not empty → serve Q1 + reset; else serve Q0. |
-| 5 | `SVMMLQ-LC-Model.py` | 6 | `My-Dataset-K-Means.csv` + server states | Metrics table | **Full SVMMLQ‑LC pipeline**. Integrates SVM → MLQ → LC server selection. Outputs: Max-Time, Min-Time, Mean, STD, CV for all 5 algorithms × 4 traffic levels. |
-
----
-
-## ⚙️ Full Six-Stage Pipeline
-┌────────────────────────────────────────────────────────┐
-│ OFFLINE PHASE (Training) │
-│ │
-│ Stage 1: Traffic Generation & Capture │
-│ Mininet + POX → 5 HTTP files (1–75 MB) │
-│ Wireshark → 4,000 records × 15 features │
-│ ↓ │
-│ Stage 2: Preprocessing │
-│ Median imputation → Feature selection (8) │
-│ → MinMax normalization │
-│ ↓ │
-│ Stage 3: K‑Means Clustering │
-│ Elbow → k=2 → Class 0 / Class 1 │
-│ ↓ │
-│ Stage 4: SVM Training │
-│ RBF kernel → 98.75% accuracy │
-└────────────────────────────────────────────────────────┘
-↓
-┌────────────────────────────────────────────────────────┐
-│ ONLINE PHASE (Real-Time) │
-│ │
-│ Stage 4: SVM Classification │
-│ New flow → Class 0 or 1 │
-│ ↓ │
-│ Stage 5: MLQ Scheduling │
-│ Queue (High), Queue (Low), T=3 │
-│ ↓ │
-│ Stage 6: LC Server Selection │
-│ Select server with min connections │
-└────────────────────────────────────────────────────────┘
-
-
----
-
-## 📈 Experimental Results Summary
-
-### Mean / Average Time (s)
-
-| Algorithm | 300 | 3,000 | 15,000 | 45,000 |
-|-----------|-----|-------|--------|--------|
-| Random | 0.02330 | 0.02465 | 0.02498 | 0.02498 |
-| RR | 0.02498 | 0.02465 | 0.02612 | 0.02645 |
-| WRR | 0.02645 | 0.02465 | 0.02498 | 0.02465 |
-| LC | 0.02645 | 0.02465 | 0.02498 | 0.02508 |
-| **SVMMLQ‑LC** | **0.00751** | **0.01278** | **0.01466** | **0.01498** |
-
-### STD / Average Response Time (s)
-
-| Algorithm | 300 | 3,000 | 15,000 | 45,000 |
-|-----------|-----|-------|--------|--------|
-| Random | 0.01331 | 0.01331 | 0.01331 | 0.01331 |
-| RR | 0.01331 | 0.01331 | 0.01497 | 0.01745 |
-| WRR | 0.01497 | 0.01331 | 0.01331 | 0.01331 |
-| LC | 0.01497 | 0.01331 | 0.01331 | 0.01331 |
-| **SVMMLQ‑LC** | **0.00147** | **0.00440** | **0.00618** | **0.00782** |
-
-### CV / Degree of Load Balancing (%)
-
-| Algorithm | 300 | 3,000 | 15,000 | 45,000 |
-|-----------|-----|-------|--------|--------|
-| Random | 59.5 | 59.5 | 59.5 | 59.5 |
-| RR | 52.2 | 57.7 | 63.9 | 66.8 |
-| WRR | 56.7 | 57.7 | 57.7 | 57.7 |
-| LC | 57.8 | 59.5 | 57.7 | 59.5 |
-| **SVMMLQ‑LC** | **19.60** | **27.4** | **31.1** | **35.9** |
-
-### Two-Way ANOVA
-
-| Metric | Factor | F | p | η² | Sig? |
-|--------|--------|---|---|-------|------|
-| Mean Time | Traffic Level | 6.28 | 0.021 | 0.162 | ✅ |
-| Mean Time | Algorithm | 6.25 | 0.008 | 0.322 | ✅ |
-| STD Time | Traffic Level | 6.28 | 0.021 | 0.162 | ✅ |
-| STD Time | Algorithm | 6.25 | 0.008 | 0.322 | ✅ |
-| CV | Traffic Level | 0.70 | 0.414 | 0.024 | ❌ |
-| CV | Algorithm | 4.10 | 0.032 | 0.284 | ✅ |
-
----
-
-## 🛠️ Experimental Environment
-
-| Parameter | Value |
-|-----------|-------|
-| Emulator | Mininet |
-| OS | Linux (Ubuntu) |
-| Controller | POX (OpenFlow v1.0) |
-| Switch | Open vSwitch (OVS1) |
-| Clients | 3 hosts: 10.0.0.4–6 |
-| Servers | 3 HTTP: 10.0.0.1–3 |
-| Controller IP | 10.0.1.1 |
-| Traffic Files | 1, 10, 25, 50, 75 MB |
-| Request Loads | 300, 3k, 15k, 45k |
-| Dataset | 4,000 × 15 → 8 features |
-| ML | scikit-learn |
-| SVM | RBF, C=1, gamma='auto' |
-| K‑Means | k=2 (Elbow Method) |
-| MLQ Threshold | T=3 |
-| Stats Tool | OriginPro 2026 |
-
----
-
-## 🚀 How to Use
-
-### Prerequisites
-
-```bash
-pip install scikit-learn numpy pandas matplotlib
+```text
+Proposed SVMMLQ-LC Algorithm/
+│
+├── README.md
+│
+├── datasets/
+│   ├── README.md
+│   ├── My-Dataset-Cleaning-Data.csv
+│   ├── My-Dataset-Feature-Selection.csv
+│   ├── My-Dataset-MinMaxScaler.csv
+│   └── My-Dataset-K-Means.csv
+│
+├── codes/
+│   ├── README.md
+│   ├── Pearson-Correlation.py
+│   ├── Elbow-method-for-calculate-K-means-and-wirh-n-clusters-12-Loop.py
+│   ├── Calculate-of-K-means-with-2-cluster.py
+│   ├── SVM-with-validation-set-manually.py
+│   ├── Multi-Level-Queue-scheduling-code.py
+│   └── SVMMLQ-LC-Model.py
+│
+├── Baseline Algorithms/
+│   ├── README.md
+│   ├── R-Algorithm.py
+│   ├── RR-Algorithm.py
+│   ├── WRR-Algorithm.py
+│   └── LC-Algorithm.py
+│
+└── figures/
+    ├── README.md
+    ├── Figure 1
+    ├── Figure 2
+    ├── ...
+    └── Figure 13
 ```
 
-### Run in Order
+> File and folder names may be adapted to match the exact names used in this repository.
+
+---
+
+## Proposed SVMMLQ-LC Workflow
+
+The proposed framework follows a six-stage workflow.
+
+### Stage 1: SDN Traffic Generation and Packet Capture
+
+Traffic is generated in a Mininet-based SDN topology containing client hosts, HTTP servers, an Open vSwitch, and a POX controller. HTTP file requests with different file sizes are generated and captured using Wireshark.
+
+### Stage 2: Data Preprocessing
+
+The captured flow-level dataset is processed through:
+
+- Median-based cleaning of missing or noisy numerical data.
+- Pearson correlation analysis and feature selection.
+- Min-Max normalization of the selected numerical features.
+
+### Stage 3: K-Means Traffic Grouping
+
+K-Means clustering is applied to the normalized feature set. The Elbow Method is used to examine candidate cluster numbers, while the final workflow uses two traffic classes to support the two-level priority queue design.
+
+### Stage 4: SVM Training and Online Classification
+
+An SVM classifier with an RBF kernel is trained using the K-Means traffic labels. The trained classifier predicts the traffic class of new flows before they enter the queue-scheduling stage.
+
+### Stage 5: Threshold-Based MLQ Scheduling
+
+The scheduling mechanism uses two queues:
+
+```text
+Queue0: High-priority traffic
+Queue1: Low-priority traffic
+```
+
+A threshold value of \(T = 3\) is used to periodically serve Queue1 when it is non-empty, thereby reducing starvation of lower-priority traffic.
+
+### Stage 6: Least-Connection Server Selection
+
+After scheduling, the Least-Connection policy selects the available server with the fewest active connections for the processed flow.
+
+---
+
+## Materials Included
+
+| Material | Quantity | Description |
+|---|---:|---|
+| Experimental datasets | 4 | Flow-level datasets produced during cleaning, feature selection, Min-Max scaling, and K-Means labeling stages |
+| Proposed-model Python scripts | 6 | Scripts for correlation analysis, K-Means analysis, Elbow Method, SVM evaluation, MLQ scheduling, and the integrated SVMMLQ-LC model |
+| Baseline algorithms | 4 | Random, Round Robin, Weighted Round Robin, and Least-Connection implementations |
+| Manuscript figures | 13 | Final figures covering topology, methodology, clustering, scheduling, performance evaluation, and threshold-sensitivity analysis |
+| Manuscript tables | 16 | Tables reported in the revised manuscript, including experimental configuration, datasets, comparisons, results, and statistical analysis |
+
+---
+
+## Datasets
+
+The `datasets/` folder contains four CSV files representing successive stages of data preparation.
+
+| Dataset | Records | Features | Description |
+|---|---:|---:|---|
+| `My-Dataset-Cleaning-Data.csv` | 4,000 | 15 | Flow-level dataset after median-based cleaning of numerical fields |
+| `My-Dataset-Feature-Selection.csv` | 4,000 | 8 | Dataset after correlation-based feature selection |
+| `My-Dataset-MinMaxScaler.csv` | 4,000 | 8 | Selected features normalized to the range \([0,1]\) |
+| `My-Dataset-K-Means.csv` | 4,000 | 9 | Normalized feature set with K-Means cluster labels |
+
+The eight final learning features are:
+
+```text
+Packets
+Bytes
+Packets A to B
+Bytes A to B
+Packets B to A
+Bytes B to A
+Bits/s A to B
+Bits/s B to A
+```
+
+---
+
+## Proposed-Model Code
+
+The `codes/` folder contains six Python scripts.
+
+| Script | Purpose |
+|---|---|
+| `Pearson-Correlation.py` | Computes and visualizes Pearson correlations among numerical flow-level features |
+| `Elbow-method-for-calculate-K-means-and-wirh-n-clusters-12-Loop.py` | Evaluates K-Means inertia and silhouette scores for candidate values of \(k\) |
+| `Calculate-of-K-means-with-2-cluster.py` | Applies K-Means clustering with two clusters and visualizes flow groups |
+| `SVM-with-validation-set-manually.py` | Trains and evaluates the SVM classifier using clustered traffic labels |
+| `Multi-Level-Queue-scheduling-code.py` | Implements the threshold-based two-level MLQ scheduling mechanism |
+| `SVMMLQ-LC-Model.py` | Integrates SVM classification, MLQ scheduling, and Least-Connection selection in the POX/OpenFlow controller workflow |
+
+Detailed descriptions and script-specific execution notes are available in `codes/README.md`.
+
+---
+
+## Baseline Algorithms
+
+The `Baseline Algorithms/` folder contains four conventional load-balancing algorithms used for controlled comparison with SVMMLQ-LC.
+
+| Script | Algorithm | Server-Selection Policy |
+|---|---|---|
+| `R-Algorithm.py` | Random | Selects an available live server randomly |
+| `RR-Algorithm.py` | Round Robin | Assigns flows sequentially in cyclic server order |
+| `WRR-Algorithm.py` | Weighted Round Robin | Assigns flows according to a predefined server-weight pattern |
+| `LC-Algorithm.py` | Least Connection | Selects the server with the fewest active connections |
+
+The baseline implementations are executed under the same controlled Mininet–POX environment, server pool, traffic-generation procedure, and evaluation conditions used for the proposed model.
+
+> The baseline source files retain their original source and copyright notices where applicable.
+
+---
+
+## Figures and Tables
+
+### Figures
+
+The `figures/` folder contains all final figures used in the revised manuscript.
+
+| Group | Figure Numbers | Content |
+|---|---|---|
+| SDN architecture and workflow | Figures 1–3 | SDN topology, six-stage SVMMLQ-LC workflow, and traffic-generation topology |
+| Data preparation and learning | Figures 4–6 | Pearson correlation analysis, Elbow Method, and K-Means clustering results |
+| Scheduling mechanism | Figure 7 | Threshold-based two-level MLQ scheduling flowchart |
+| Performance evaluation | Figures 8–10 | Comparative performance outcomes for the proposed model and baseline algorithms |
+| Threshold sensitivity | Figures 11–13 | Sensitivity analysis of waiting time and Jain’s fairness index under different threshold values |
+
+### Tables
+
+The revised manuscript includes **16 tables** documenting:
+
+- Related-work comparisons.
+- Dataset feature definitions.
+- Experimental platform and hardware configuration.
+- Data preprocessing and feature selection.
+- K-Means and SVM evaluation results.
+- Baseline and proposed-method comparisons.
+- Performance results at multiple traffic loads.
+- Statistical analysis and effect-size reporting.
+- Threshold-sensitivity outcomes.
+
+The complete tables are available in the revised manuscript.
+
+---
+
+## Experimental Environment
+
+| Parameter | Configuration |
+|---|---|
+| SDN emulator | Mininet |
+| Operating system | Ubuntu Linux 20.04.4 LTS |
+| SDN controller | POX |
+| OpenFlow version | OpenFlow v1.0 |
+| Data-plane switch | Open vSwitch (OVS) |
+| Topology | One OpenFlow switch, three client hosts, and three HTTP servers |
+| Client addresses | 10.0.0.4, 10.0.0.5, and 10.0.0.6 |
+| Server addresses | 10.0.0.1, 10.0.0.2, and 10.0.0.3 |
+| Controller address | 10.0.1.1 |
+| HTTP file sizes | 1 MB, 10 MB, 25 MB, 50 MB, and 75 MB |
+| Dataset size | 4,000 flow records |
+| Selected features | 8 numerical flow-level features |
+| K-Means configuration | Two clusters |
+| SVM configuration | RBF kernel |
+| MLQ threshold | \(T = 3\) |
+| Statistical analysis | OriginPro 2026 |
+
+---
+
+## Main Evaluation Conditions
+
+The proposed framework and baseline algorithms were evaluated under four traffic loads:
+
+```text
+300 requests
+3,000 requests
+15,000 requests
+45,000 requests
+```
+
+The evaluation includes time-based metrics, load-distribution measures, fairness analysis, and threshold-sensitivity analysis. The revised manuscript presents the full numerical outcomes and interpretation.
+
+---
+
+## Requirements
+
+### Python Dependencies
+
+Install the required Python packages:
 
 ```bash
-python "Elbow-method-for-calculate-K-means-and-with-n-clusters-12-Loop.py"
+pip install numpy pandas matplotlib seaborn scikit-learn
+```
+
+### SDN Environment
+
+For controller-level execution, the following environment is required:
+
+```text
+Mininet
+POX controller
+Open vSwitch
+OpenFlow 1.0
+Python
+```
+
+Some scripts contain local file paths. Update the input and output paths to match your local directory structure before execution.
+
+---
+
+## Suggested Execution Order
+
+### Offline Data-Analysis Phase
+
+```bash
+python "Pearson-Correlation.py"
+python "Elbow-method-for-calculate-K-means-and-wirh-n-clusters-12-Loop.py"
 python "Calculate-of-K-means-with-2-cluster.py"
 python "SVM-with-validation-set-manually.py"
+```
+
+### Scheduling and Controller Phase
+
+```bash
 python "Multi-Level-Queue-scheduling-code.py"
-python "SVMMLQ-LC-Model.py"
 ```
 
-### Load Example
+The integrated `SVMMLQ-LC-Model.py` and the baseline algorithms require a configured POX/OpenFlow/Mininet environment.
 
-```python
-import pandas as pd
-df = pd.read_csv("My-Dataset-MinMaxScaler.csv")
-print(df.shape)  # (4000, 8)
+---
+
+## Reproducibility Notes
+
+- Update all dataset and output paths before running the scripts.
+- The clustering and classifier outputs may vary if the input data, random seeds, package versions, or preprocessing choices are changed.
+- The controller-level results depend on the Mininet topology, server configuration, traffic-generation settings, and POX/OpenFlow setup.
+- Baseline algorithms should be run using the same topology and test conditions as the proposed framework for fair comparison.
+- The figures, datasets, source code, baseline algorithms, and manuscript tables correspond to the revised version of the study.
+
+---
+
+## Citation
+
+If you use, adapt, or refer to the repository materials, please cite:
+
+```text
+M. A. M. Alrammahi, “SVMMLQ-LC: Proposed Algorithm – Datasets, Source Code, Baseline Algorithms, and Experimental Figures,” GitHub repository, 2026. Available:
+https://github.com/maghribalramahi83/sdn-load-balancing/tree/main/Proposed%20SVMMLQ-LC%20Algorithm
+```
+
+For the baseline study, please also cite:
+
+```text
+M. A. M. Alrammahi and W. S. Bhaya, “Performance Analysis for Load Balancing Algorithms using POX Controller in SDN,” in 2022 International Conference on Data Science and Intelligent Computing (ICDSIC), 2022, pp. 175–180. https://doi.org/10.1109/ICDSIC56987.2022.10076081
 ```
 
 ---
 
-## 📖 Citation
-
-If you use this work, please cite:
-
-> **[5] Baseline:**  
-> M. A. M. Alrammahi and W. S. Bhaya, "Performance Analysis for Load Balancing Algorithms using POX Controller in SDN," in 2022 International Conference on Data Science and Intelligent Computing (ICDSIC), 2022: IEEE, pp. 175–180.  DOI: 10.1109/ICDSIC56987.2022.10076081
-
----
-
-## 📬 Contact
+## Contact
 
 **Maghrib Abidalreda Maky Alrammahi**  
 University of Kufa — ITRDC, Najaf, Iraq  
-📧 maghrib.alramahi@uokufa.edu.iq
-
----
+Email: [maghrib.alramahi@uokufa.edu.iq](mailto:maghrib.alramahi@uokufa.edu.iq)
 
 ## 📜 License
 
