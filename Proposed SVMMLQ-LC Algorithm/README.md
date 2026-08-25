@@ -2,9 +2,15 @@
 
 > **Repository:** `sdn-load-balancing`  
 > **Project Folder:** `Proposed SVMMLQ-LC Algorithm`  
-> **Author:** Maghrib Abidalreda Maky Alrammahi  
-> **Institution:** University of Kufa — ITRDC, Najaf, Iraq  
 > **Status:** Revised manuscript under review (2026)
+
+## Authors
+
+1. **Maghrib Abidalreda Maky Alrammahi**\*  
+2. **Faris Sattar Hadi**  
+3. **Abbas Nasir AlTaee**
+
+\*Corresponding author.
 
 ---
 
@@ -327,9 +333,10 @@ M. A. M. Alrammahi and W. S. Bhaya, “Performance Analysis for Load Balancing A
 
 ---
 
-## Contact
+## Corresponding Author
 
 **Maghrib Abidalreda Maky Alrammahi**  
+On behalf of Faris Sattar Hadi and Abbas Nasir AlTaee  
 University of Kufa — ITRDC, Najaf, Iraq  
 Email: [maghrib.alramahi@uokufa.edu.iq](mailto:maghrib.alramahi@uokufa.edu.iq)
 
