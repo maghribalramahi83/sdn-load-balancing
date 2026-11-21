@@ -1,4 +1,4 @@
-# SVMMLQ-LC: Intelligent SDN Load Balancing with SVM, Multi-Level Queue Scheduling, and Least-Connection Selection
+# SVM-Assisted Flow Grouping and Queue-Aware Least-Connection Load Balancing in Software-Defined Networks: A Mininet–POX Evaluation 
 
 > **Repository:** `sdn-load-balancing`  
 > **Project Folder:** `Proposed SVMMLQ-LC Algorithm`  
