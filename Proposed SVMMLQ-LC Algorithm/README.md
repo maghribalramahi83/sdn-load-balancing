@@ -18,7 +18,7 @@
 
 This repository provides the reproducibility materials for the revised manuscript:
 
-> **SVMMLQ-LC: An Intelligent Machine Learning-Based Load-Balancing Framework with Multi-Level Queue Scheduling and Least-Connection Selection for Software-Defined Networking**
+> **SVM-Assisted Flow Grouping and Queue-Aware Least-Connection Load Balancing in Software-Defined Networks: A Mininet–POX Evaluation **
 
 The repository includes the four experimental datasets, six Python scripts for the proposed model, four baseline load-balancing implementations, thirteen manuscript figures, and supporting materials associated with the revised study.
 
